@@ -23,7 +23,10 @@ RUN composer install --no-dev --optimize-autoloader
 
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-RUN mkdir -p /var/www/html/database && touch /var/www/html/database/database.sqlite
-
+RUN mkdir -p /var/www/html/database && \
+    touch /var/www/html/database/database.sqlite && \
+    chown -R www-data:www-data /var/www/html/database && \
+    chmod -R 775 /var/www/html/database && \
+    chmod 664 /var/www/html/database/database.sqlite
 EXPOSE 80
 CMD php artisan migrate --force && apache2-foreground
