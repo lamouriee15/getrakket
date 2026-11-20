@@ -23,8 +23,7 @@ RUN mkdir -p storage/framework/cache/data storage/framework/sessions storage/fra
     && composer dump-autoload --optimize --no-dev --no-interaction \
     && chown -R www-data:www-data storage bootstrap/cache
 
-COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN sed -i 's/\r$//' /usr/local/bin/entrypoint.sh && chmod +x /usr/local/bin/entrypoint.sh
-
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 EXPOSE 10000
 CMD ["entrypoint.sh"]
+    
